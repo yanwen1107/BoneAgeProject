@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>骨齡辨識</title>
+    <style>
+        #preview, #processedImage {
+            max-width: 100%;
+            max-height: 300px;
+            display: inline-block; /* 使兩張圖片並排顯示 */
+        }
+    </style>
+</head>
+<body>
+  <h1>AI骨齡辨識</h1>
+  <h2>AI Bone Age Recognition 
+  <br/>
+  <hr/>
+<h2>介紹 Introduction</h2>
+  <p>用骨頭看你ㄉ年齡<p/>
+  <br/>
+  <hr/>
+    <input type="file" id="uploadInput" onchange="previewImage()">
+    <button onclick="processImage()">確認處理</button>
+    <br>
+    <img id="preview" alt="預覽圖片">
+    <img id="processedImage" alt="處理後圖片">
+    <script>
+        function previewImage() {
+            var input = document.getElementById('uploadInput');
+            var preview = document.getElementById('preview');
+
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function processImage() {
+            var preview = document.getElementById('preview');
+            var processedImage = document.getElementById('processedImage');
+
+            // 將預覽圖片轉換成base64
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.width = preview.width;
+            canvas.height = preview.height;
+
+            ctx.drawImage(preview, 0, 0, canvas.width, canvas.height);
+            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            
+            for (var i = 0; i < imageData.data.length; i += 4) {
+                var avg = (imageData.data[i] + imageData.data[i + 1] + imageData.data[i + 2]) / 3;
+                imageData.data[i] = avg;
+                imageData.data[i + 1] = avg;
+                imageData.data[i + 2] = avg;
+            }
+
+            ctx.putImageData(imageData, 0, 0);
+
+            // 將處理後的圖片轉換成base64
+            var processedImageData = canvas.toDataURL('image/png');
+
+            // 將base64格式的圖片傳送到伺服器
+            fetch('/process_image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'imageData=' + encodeURIComponent(processedImageData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                processedImage.src = 'data:image/png;base64,' + data.processedImage;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
