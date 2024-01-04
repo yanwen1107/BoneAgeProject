@@ -27,6 +27,10 @@
             <br />
             <hr />
             <input type="file" id="uploadInput" onchange="previewImage()">
+            <label for="actualAgeYearInput">請輸入實際年齡（年）：</label>
+            <input type="number" id="actualAgeYearInput" placeholder="請輸入年份">
+            <label for="actualAgeMonthInput">請輸入實際年齡（月）：</label>
+            <input type="number" id="actualAgeMonthInput" placeholder="請輸入月份">
             <button onclick="processImage()">確認處理</button>
             <br>
             <img id="preview" alt="預覽圖片">
@@ -55,7 +59,9 @@
                 var preview = document.getElementById('preview');
                 var processedImage = document.getElementById('processedImage');
                 var predictionText = document.getElementById('predictionText');
-
+                var actualAgeInput = document.getElementById('actualAgeInput');
+                var actualAgeYearInput = document.getElementById('actualAgeYearInput');
+                var actualAgeMonthInput = document.getElementById('actualAgeMonthInput');
 
                 // 將預覽圖片轉換成base64
                 var canvas = document.createElement('canvas');
@@ -84,12 +90,15 @@
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: 'imageData=' + encodeURIComponent(processedImageData),
+                    body: 'imageData=' + encodeURIComponent(processedImageData) + '&actualAgeYear=' + actualAgeYearInput.value + '&actualAgeMonth=' + actualAgeMonthInput.value,
                 })
                     .then(response => response.json())
                     .then(data => {
                         processedImage.src = 'data:image/png;base64,' + data.processedImage;
-                        predictionText.innerText = '骨齡預測值: ' + data.prediction;
+                        //predictionText.innerText = '骨齡預測值: ' + data.prediction;
+                        var absoluteDifference = Math.abs((actualAgeYearInput.value * 12) + parseInt(actualAgeMonthInput.value) - data.prediction);
+                        predictionText.innerText = '骨齡預測值: ' + data.prediction + '，差異: ' + absoluteDifference;
+
 
                     })
                     .catch(error => console.error('Error:', error));
