@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AI Bone Age Test</title>
+    <meta name="description" content="Free bootstrap template Atlas">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" sizes="32x32" type="image/png">
+    <!-- custom.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    <!-- bootstrap.min.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+</head>
+
+<body>
+    <!-- banner -->
+    <div class="jumbotron jumbotron-fluid" id="banner" style="background-image: url('static/img/banner-bk.jpg');">
+
+        <div class="container text-center text-md-left">
+            <header>
+                <div class="row justify-content-between">
+                    <div class="col-2">
+                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo">
+                    </div>
+                    <div class="col-6 align-self-center text-right">
+                        <!--a href="#" class="text-white lead">Get Early Access</a-->
+                    </div>
+                </div>
+            </header>
+            <h1 data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true"
+                class="display-3 text-white font-weight-bold my-5">
+                AI骨齡檢測<br>
+                AI Bone Age Test
+            </h1>
+            <p data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true"
+                class="lead text-white my-4">
+                利用深度學習辨識<br>
+                您的骨頭年齡
+            </p>
+            <a href="{{ url_for('index_2') }}" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000"
+                data-aos-once="true" class="btn my-4 font-weight-bold atlas-cta cta-green">點我去測試</a>
+        </div>
+    </div>
+    <!-- three-blcok -->
+    <div class="container my-5 py-2">
+        <h2 class="text-center font-weight-bold my-5">什麼是骨齡檢測？</h2>
+        <div class="row">
+            <div data-aos="fade-up" data-aos-delay="0" data-aos-duration="1000" data-aos-once="true"
+                class="col-md-4 text-center">
+                <img src="{{ url_for('static', filename='img/smart-protect-1.jpg') }}" alt="Anti-spam" class="mx-auto">
+                <h4>判讀生長狀況</h4>
+                <p>利用X光攝影左手骨骼影像，根據骨骼狀態、成長程度與骨骼版癒合程度等，推算出骨齡。並與實際年齡比較，判斷骨骼成熟程度、預測青少年成年後身高、診斷內分泌疾病。</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" data-aos-once="true"
+                class="col-md-4 text-center">
+                <img src="{{ url_for('static', filename='img/smart-protect-2.jpg') }}" alt="Phishing Detect"
+                    class="mx-auto">
+                <h4>可靠資料庫</h4>
+                <p>由RSNA(北美放射學會)提供的開源數據集訓練模型，完整收集0-19歲青少年左手X光影像資料，其中包含不同性別標籤。</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000" data-aos-once="true"
+                class="col-md-4 text-center">
+                <img src="{{ url_for('static', filename='img/smart-protect-3.jpg') }}" alt="Smart Scan" class="mx-auto">
+                <h4>深度學習模型</h4>
+                <p>影像經過前處理與模型判讀，可顯示結果與實際年齡差。我們的模型精確率達到__％！</p>
+            </div>
+        </div>
+    </div>
+    <!-- feature (skew background) -->
+    <div class="jumbotron jumbotron-fluid feature" id="feature-first">
+        <div class="container my-5">
+            <div class="row justify-content-between text-center text-md-left">
+                <div data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" class="col-md-6">
+                    <h2 class="font-weight-bold">在家就能完成</h2>
+                    <p class="my-4">不用跑去醫院
+                        <br> 就可以馬上得知結果:D
+                    </p>
+                    <a href="{{ url_for('index_2') }}" class="btn my-4 font-weight-bold atlas-cta cta-blue">馬上測</a>
+                </div>
+                <div data-aos="fade-left" data-aos-duration="1000" data-aos-once="true"
+                    class="col-md-6 align-self-center">
+                    <img src="{{ url_for('static', filename='img/feature-1.png') }}" alt="Take a look inside"
+                        class="mx-auto d-block">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- feature (green background) -->
+    <div class="jumbotron jumbotron-fluid feature" id="feature-last">
+        <div class="container">
+            <div class="row justify-content-between text-center text-md-left">
+                <div data-aos="fade-left" data-aos-duration="1000" data-aos-once="true" class="col-md-6 flex-md-last">
+                    <h2 class="font-weight-bold">完全免費</h2>
+                    <p class="my-4">
+                        別的網站或醫院都要錢
+                        <br> 我們免費:D
+                    </p>
+                    <a href="{{ url_for('index_2') }}" class="btn my-4 font-weight-bold atlas-cta cta-blue">馬上測</a>
+                </div>
+                <div data-aos="fade-right" data-aos-duration="1000" data-aos-once="true"
+                    class="col-md-6 align-self-center flex-md-first">
+                    <img src="{{ url_for('static', filename='img/feature-2.png') }}" alt="Safe and reliable"
+                        class="mx-auto d-block">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AOS -->
+    <script src="{{ url_for('static', filename='js/aos.js') }}"></script>
+    <script>
+        AOS.init({
+        });
+    </script>
+</body>
+
+</html>
